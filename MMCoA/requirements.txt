@@ -1,0 +1,32 @@
+# requirements.txt for AttackMMCoA.py (MMCoA 框架)
+#
+# 用途：多模态对抗攻击
+#   image 模式 —— OpenAI CLIP 图像编码器对抗扰动
+#   text  模式 —— BERT MLM 文本对抗扰动
+#   both  模式 —— 图像 + 文本联合攻击（需要全部依赖）
+#
+# 安装方式：
+#   conda create -n mmcoa python=3.10
+#   conda activate mmcoa
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#   pip install -r requirements.txt
+#
+# 注意：torch / torchvision / torchaudio 通过 conda 安装，不写入本文件
+
+# ===== image / both 模式依赖 =====
+
+# OpenAI CLIP —— 需从 GitHub 安装（PyPI 上无官方发布包）
+# 安装命令：pip install git+https://github.com/openai/CLIP.git
+# 以下一行可直接被 pip install -r 解析：
+git+https://github.com/openai/CLIP.git
+
+Pillow
+numpy
+tqdm
+scipy                   # attack/imageAttack.py: import scipy.stats as st（MI 高斯核）
+matplotlib              # attack/imageAttack.py: import matplotlib.pyplot as plt
+
+# ===== text / both 模式额外依赖 =====
+
+transformers>=4.26.0    # BertTokenizer + BertForMaskedLM
+ftfy                    # transformers 文本预处理依赖

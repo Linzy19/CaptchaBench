@@ -1,0 +1,33 @@
+# requirements.txt for AttackNightshade.py (nightshade-release 框架)
+#
+# 用途：SD VAE 潜在空间投毒攻击
+#   image   模式 —— 只需 VAE（AutoencoderKL），显存要求较低
+#   concept 模式 —— 运行完整 StableDiffusionPipeline 文生图管线，
+#                   建议 GPU 显存 >= 8 GB
+#
+# 安装方式：
+#   conda create -n nightshade python=3.10
+#   conda activate nightshade
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#   pip install -r requirements.txt
+#
+# 注意：torch / torchvision / torchaudio 通过 conda 安装，不写入本文件
+
+# ===== image 模式依赖（AutoencoderKL VAE）=====
+
+# diffusers>=0.14.0：StableDiffusionPipeline 支持 safety_checker=None，
+#                    AutoencoderKL API 在此版本后趋于稳定
+diffusers>=0.14.0
+
+Pillow
+numpy
+tqdm
+einops                  # opt.py: from einops import rearrange（潜在表示维度变换）
+
+# ===== concept 模式额外依赖（完整 SD Pipeline）=====
+# concept 模式需要加载并运行 StableDiffusionPipeline，
+# 以下依赖由 diffusers 间接需要，建议显式声明以避免版本冲突：
+
+transformers>=4.26.0    # CLIPTextModel / tokenizer
+accelerate>=0.16.0      # 模型加载加速（from_pretrained device_map 支持）
+ftfy                    # transformers 文本预处理依赖

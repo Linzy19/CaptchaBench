@@ -1,0 +1,26 @@
+# requirements.txt for AttackMI.py (AdversarialAttacks 框架)
+#
+# 用途：MI_CommonWeakness 迁移攻击，使用 ResNet-18、ResNet-50、ViT-B/16
+#       三个视觉编码器（torchvision.models + timm 加载）
+#
+# 安装方式：
+#   conda create -n adv_attack python=3.10
+#   conda activate adv_attack
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#   pip install -r requirements.txt
+#
+# 注意：torch / torchvision / torchaudio 通过 conda 安装，不写入本文件
+
+# ---------- 核心视觉模型 ----------
+timm>=0.6.12            # ViT-B/16 等模型加载
+
+# ---------- 数值与图像处理 ----------
+numpy
+Pillow
+
+# ---------- 科学计算 ----------
+scipy                   # attacks/AdversarialInput/CommonWeakness.py、TI.py、SVRE.py、VMI.py
+                        # 均使用 from scipy import stats as st（高斯核生成）
+
+# ---------- 工具 ----------
+tqdm

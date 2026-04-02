@@ -1,0 +1,57 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large data files — not tracked in git
+outputs/
+Data_source.zip
+*.zip
+*.tar.gz
+*.tar
+
+# Large evaluation data (XTransferBench COCO eval tools)
+XTransferBench/evaluations/pycocoevalcap/meteor/data/
+XTransferBench/evaluations/pycocoevalcap/example/
+XTransferBench/evaluations/pycocoevalcap/spice/*.jar
+
+# Model weights
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+
+# Logs
+*.log
+wandb/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporary
+tmp/
+temp/

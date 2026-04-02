@@ -1,0 +1,29 @@
+# requirements_attack.txt for AttackASPL.py (Anti-DreamBooth 框架)
+#
+# 用途：
+#   fast 模式 —— VAE-only PGD，只需 diffusers + 基础依赖
+#   full 模式 —— 完整 ASPL 攻击，额外需要 accelerate、transformers
+#
+# 安装方式：
+#   conda create -n anti_dreambooth python=3.10
+#   conda activate anti_dreambooth
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#   pip install -r requirements_attack.txt
+#
+# 注意：torch / torchvision / torchaudio 通过 conda 安装，不写入本文件
+
+# ===== 核心依赖（fast 模式必须）=====
+
+diffusers>=0.14.0       # AutoencoderKL VAE；>=0.14.0 起 safety_checker=None 支持，
+                        # DiffusionPipeline API 趋于稳定（full 模式需要）
+Pillow
+numpy
+tqdm
+
+# ===== full 模式额外依赖 =====
+# full 模式运行完整 ASPL（attacks/aspl.py），需要以下包：
+
+accelerate>=0.16.0      # 多卡训练加速
+transformers>=4.26.0    # CLIP text encoder / tokenizer
+ftfy                    # transformers 文本预处理依赖
+datasets>=2.10.0        # attacks/aspl.py（full 模式）import datasets

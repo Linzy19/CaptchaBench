@@ -1,0 +1,38 @@
+# requirements.txt for Attack-Bard 框架
+# 适用：AttackImage.py（图像特征攻击）+ AttackVLM.py（VLM 对抗攻击）
+#
+# 安装方式：
+#   conda create -n attack_bard python=3.10
+#   conda activate attack_bard
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#   pip install -r requirements.txt
+#
+# 注意：torch / torchvision / torchaudio 通过 conda 安装，不写入本文件
+
+# ===== 核心 VLM 依赖 =====
+
+transformers>=4.26.0    # BLIP2、InstructBLIP、CLIP 模型加载；ViT.py 使用 transformers.ViTModel
+accelerate>=0.16.0      # 大模型加载加速
+
+# ===== 视觉模型 =====
+
+timm>=0.6.12            # minigpt4 内部依赖：minigpt4/models/eva_vit.py（timm.models.layers）
+                        # 和 minigpt4/common/dist_utils.py（timm.models.hub）均使用 timm
+                        # 注意：surrogates/FeatureExtractors/ViT.py 使用 transformers.ViTModel，不使用 timm
+
+# ===== 图像与数值处理 =====
+
+Pillow
+numpy
+scipy                   # SSA 攻击高斯核（attacks/AdversarialInput/）
+einops                  # SSA 频谱模拟攻击内部使用
+
+# ===== 工具 =====
+
+tqdm
+ftfy                    # transformers 文本预处理
+
+# ===== MiniGPT4 依赖（使用 minigpt4 时需要，否则可不安装）=====
+
+gradio                  # surrogates/get_gpt4_image_model.py
+omegaconf               # minigpt4 配置管理

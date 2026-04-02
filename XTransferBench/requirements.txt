@@ -1,0 +1,28 @@
+# requirements.txt for AttackXTransfer.py (XTransferBench 框架)
+#
+# 用途：基于 OpenCLIP 的跨模型对抗迁移攻击
+#
+# 安装方式：
+#   conda create -n xtransfer python=3.10
+#   conda activate xtransfer
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#   pip install -r requirements.txt
+#
+# 注意：
+#   1. torch / torchvision / torchaudio 通过 conda 安装，不写入本文件
+#   2. 本文件与 pyproject.toml 共存；pyproject.toml 用于包发布，
+#      本文件用于开发环境快速复现
+
+# ===== 核心依赖 =====
+
+# OpenCLIP —— PyPI 包名为 open_clip_torch
+# 安装命令：pip install open_clip_torch
+# 如需从源码安装最新版：pip install git+https://github.com/mlfoundations/open_clip.git
+open_clip_torch>=2.20.0
+
+# ---------- 图像与数值处理 ----------
+Pillow
+numpy
+
+# ---------- 工具 ----------
+tqdm
